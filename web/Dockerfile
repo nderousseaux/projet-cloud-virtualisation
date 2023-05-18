@@ -1,5 +1,5 @@
-# docker build -t cloud-projet/web .
-# docker run -p 3000:3000 cloud-projet/web
+# docker build -t quay.io/cloud-projet/web .
+# docker run -p 3000:3000 --env-file ../.env quay.io/cloud-projet/web
 
 # On crée une image de l'application node js
 FROM node:18

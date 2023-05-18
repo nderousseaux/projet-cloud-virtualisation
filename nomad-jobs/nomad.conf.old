@@ -1,0 +1,108 @@
+job "rsz-img" {
+  datacenters = ["homme-de-fer"]
+  constraint {
+    attribute = "${node.unique.id}"
+    value     = "ae367b9f-487e-2a9f-340e-9396284ee72b"
+	}
+  
+
+  group "app" {
+    count = 1
+
+    network {
+      port "web" {
+        static = 8081
+        to = 3000
+      }
+			port "api" {
+				static = 8080
+				to = 8080
+			}
+			port "redis" {
+				static = 6379
+				to = 6379
+			}
+    }
+
+    task "web" {
+      driver = "docker"
+      config {
+        image = "quay.io/cloud-projet/web"
+        ports = ["web"]
+      }
+
+			service {
+				name = "web"
+				port = "web"
+
+				check {
+					name     = "alive"
+					type     = "http"
+					protocol = "http"
+					path     = "/"
+					interval = "10s"
+					timeout  = "2s"
+				}
+			}
+
+      resources {
+        cpu    = 100
+        memory = 128
+      }
+    }
+      
+  #   task "api" {
+	# 		driver = "docker"
+	# 		config {
+	# 			image = "quay.io/cloud-projet/api"
+	# 			ports = ["api"]
+	# 		}
+
+	# 		env {
+	# 			AWS_ACCESS_KEY_ID=
+	# 			AWS_SECRET_ACCESS_KEY=
+	# 			S3_BUCKET_NAME=homme-de-fer
+	# 			S3_ENDPOINT_URL="https://s3.100do.se/"
+	# 			CELERY_BROKER_URL="redis://redis:6379/0"
+	# 		}
+
+	# 		resources {
+	# 			cpu    = 100
+	# 			memory = 128
+	# 		}
+	# 	}
+
+	# 	task "worker" {
+	# 		driver = "docker"
+	# 		config {
+	# 			image = "quay.io/cloud-projet/worker"
+	# 		}
+
+	# 		env {
+	# 			AWS_ACCESS_KEY_ID=homme-de-fer
+	# 			AWS_SECRET_ACCESS_KEY=
+	# 			S3_BUCKET_NAME=homme-de-fer
+	# 			S3_ENDPOINT_URL="https://s3.100do.se/"
+	# 			CELERY_BROKER_URL="redis://redis:6379/0"	
+	# 		}
+
+	# 		resources {
+	# 			cpu    = 100
+	# 			memory = 128
+	# 		}
+	# 	}
+
+	# 	task "redis" {
+	# 		driver = "docker"
+	# 		config {
+	# 			image = "redis"
+	# 			ports = ["redis"]
+	# 		}
+
+	# 		resources {
+	# 			cpu    = 100
+	# 			memory = 128
+	# 		}
+	# 	}
+  # }
+}

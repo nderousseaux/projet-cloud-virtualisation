@@ -1,5 +1,5 @@
-# docker build -t cloud-projet/api -f Dockerfile.api .
-# docker run -p 8081:8080 --env-file ../.env cloud-projet/api
+# docker build -t quay.io/cloud-projet/api -f Dockerfile.api .
+# docker run -p 8081:8080 --env-file ../.env quay.io/cloud-projet/api
 
 FROM python:3.11.3-slim-buster
 

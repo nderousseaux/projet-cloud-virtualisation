@@ -1,5 +1,5 @@
-# docker build -t cloud-projet/worker -f Dockerfile.worker .
-# docker run --env-file ../.env cloud-projet/worker
+# docker build -t quay.io/cloud-projet/worker -f Dockerfile.worker .
+# docker run --env-file ../.env quay.io/cloud-projet/worker
 
 FROM python:3.11.3-slim-buster
 

@@ -1,8 +1,8 @@
 # docker-compose --env-file .env up --build
 
 services:
-  # docker build -t cloud-projet/web web/.
-  # docker run -p 8080:3000 cloud-projet/web
+  # docker build -t quay.io/cloud-projet/web web/.
+  # docker run -p 8080:3000 quay.io/cloud-projet/web
   frontend:
     container_name: cloud-front
     build: web/.
@@ -26,8 +26,8 @@ services:
     ports:
       - "6379:6379"
 
-  # docker build -t cloud-projet/api -f api/Dockerfile.api api
-  # docker run -p 8081:8080 --env-file .env cloud-projet/api
+  # docker build -t quay.io/cloud-projet/api -f api/Dockerfile.api api
+  # docker run -p 8081:8080 --env-file .env quay.io/cloud-projet/api
   api:
     container_name: cloud-api
     build:
@@ -39,8 +39,8 @@ services:
       - .env
 
 
-  # docker build -t cloud-projet/worker -f api/Dockerfile.worker api
-  # docker run --env-file .env cloud-projet/worker
+  # docker build -t quay.io/cloud-projet/worker -f api/Dockerfile.worker api
+  # docker run --env-file .env quay.io/cloud-projet/worker
   worker:
     container_name: cloud-worker
     build:
