@@ -1,5 +1,5 @@
 # docker build -t cloud-projet/api -f Dockerfile.api .
-# docker run -p 8080:8080 cloud-projet/api
+# docker run -p 8081:8080 --env-file ../.env cloud-projet/api
 
 FROM python:3.11.3-slim-buster
 
@@ -16,10 +16,6 @@ RUN pip install gunicorn
 
 # Make port 8080 available to the world outside this container
 EXPOSE 8080
-
-# Define environment variable
-ENV CELERY_BROKER_URL=redis://db:6379/0
-ENV S3_ENDPOINT_URL=http://minio:9000
 
 # Run app
 CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:8080", "image_api.web:app"]

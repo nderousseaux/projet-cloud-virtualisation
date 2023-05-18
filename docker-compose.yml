@@ -1,11 +1,23 @@
+# docker-compose --env-file .env up --build
+
 services:
   # docker build -t cloud-projet/web web/.
-  # docker run -p 3000:3000 cloud-projet/web
+  # docker run -p 8080:3000 cloud-projet/web
   frontend:
     container_name: cloud-front
     build: web/.
     ports:
-      - "3000:3000"
+      - "8080:3000"
+
+  # docker run -d -p 9000:9000 -p 9001:9001 --rm --name minio quay.io/minio/minio server /data --console-address ":9001"
+  minio:
+    container_name: cloud-minio
+    image: quay.io/minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    command: server /data --console-address ":9001"
+    
 
   # docker run -p 6379:6379 redis:6.2
   db:
@@ -14,31 +26,25 @@ services:
     ports:
       - "6379:6379"
 
-  # docker run -p 9000:9000 -p 9001:9001 quay.io/minio/minio server /data --console-address ":9001"
-  minio:
-    container_name: cloud-minio
-    image: quay.io/minio/minio
-    command: server /data --console-address ":9001"
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-
   # docker build -t cloud-projet/api -f api/Dockerfile.api api
-  # docker run -p 8080:8080 cloud-projet/api
+  # docker run -p 8081:8080 --env-file .env cloud-projet/api
   api:
     container_name: cloud-api
     build:
       context: api/.
       dockerfile: Dockerfile.api
     ports:
-      - "8080:8080"
+      - "8081:8080"
+    env_file:
+      - .env
+
 
   # docker build -t cloud-projet/worker -f api/Dockerfile.worker api
-  # docker run cloud-projet/worker
+  # docker run --env-file .env cloud-projet/worker
   worker:
     container_name: cloud-worker
     build:
       context: api/.
       dockerfile: Dockerfile.worker
-
-
+    env_file:
+      - .env

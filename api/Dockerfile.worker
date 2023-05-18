@@ -1,5 +1,5 @@
 # docker build -t cloud-projet/worker -f Dockerfile.worker .
-# docker run cloud-projet/worker
+# docker run --env-file ../.env cloud-projet/worker
 
 FROM python:3.11.3-slim-buster
 
@@ -11,10 +11,6 @@ COPY . /app
 
 # Install any needed packages
 RUN pip install .
-
-# Define environment variable
-ENV CELERY_BROKER_URL=redis://db:6379/0
-ENV S3_ENDPOINT_URL=http://minio:9000
 
 # Run app
 CMD ["celery", "--app", "image_api.worker.app", "worker"]
