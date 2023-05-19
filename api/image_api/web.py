@@ -17,6 +17,12 @@ if bucket.creation_date is None:
 app = Flask(__name__)
 CORS(app)
 
+# On accepte les cors de n'importe quel domaine
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
 
 @app.route("/")
 def index():

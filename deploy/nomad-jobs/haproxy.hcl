@@ -2,11 +2,11 @@ job "haproxy" {
   datacenters = ["homme-de-fer"]
   type        = "service"
 
-  # On prefère utiliser un noeud plutot qu'un autre
-  affinity {
-    attribute = "${node.unique.id}"
-    value     = "ae367b9f-487e-2a9f-340e-9396284ee72b"
-  }
+  // # On prefère utiliser un noeud plutot qu'un autre
+  // affinity {
+  //   attribute = "${node.unique.id}"
+  //   value     = "ae367b9f-487e-2a9f-340e-9396284ee72b"
+  // }
 
 
   group "haproxy" {
@@ -16,6 +16,7 @@ job "haproxy" {
     network {
       port "http" {
         static = 8081
+        host_network = "public"
       }
     }
 
@@ -78,7 +79,6 @@ frontend http-in
   acl is_web hdr(Host) -i homme-de-fer.100do.se:8081
   use_backend api_back if is_api
   use_backend front_back if is_web
-
   default_backend poubelle
 
 

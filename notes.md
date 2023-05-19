@@ -73,16 +73,16 @@ Si on avait eu plus de temps, le script deploy n'aurait pas subsitué les variab
 
 #### a - Happroxy
 
-On décide de mettre le répartiteur de charge sur elmerforst. On peut voir son job nomad dans `nomad-jobs/haproxy.hcl`. 
+On décide de mettre le répartiteur de charge sur elmerforst. On peut voir son job nomad dans `nomad-jobs/haproxy.hcl`.
 
 ```
-  affinity {
-    attribute = "${node.unique.id}"
-    value     = "ae367b9f-487e-2a9f-340e-9396284ee72b"
-  }
+port "http" {
+  static = 8081
+  host_network = "public"
+}
 ```
 
-On défini que haproxy devra être préférentiellement sur elmerforst, car elle doit être à un endroit spécifique, mais en cas de problème, nomad devrait automatiquement basculer sur baggersee.
+On défini que haproxy devra être préférentiellement sur un noeud possédant le réseau public. Donc elmerforst. Mais si il y a un problème, keepalived transmet l'ip flottante vers baggersee. Et nomad va transmettre le happroxy sur baggersee aussi.
 
 On met l'ip flottante sur elmerforst. Ainsi, homme-de-fer.100do.se redirige vers lui.
 
@@ -148,8 +148,59 @@ Le script deploy.sh fait tout ça.
 
 On aurrait pu faire ça sur gitlab-ci/cd, mais pas confiance en gitlab 
 
+### 5 - Keepalived
+
+Sur elmerforst
+
+```
+vrrp_instance VI_1 {
+        state MASTER
+        interface vxlan100
+        virtual_router_id 51
+        priority 255
+        advert_int 1
+        authentication {
+              auth_type PASS
+              auth_pass ?7zJk!FVvr!m
+        }
+        virtual_ipaddress {
+              172.16.3.5/16
+        }
+}
+```
+
+Sur baggersee
+
+```
+vrrp_instance VI_1 {
+        state BACKUP
+        interface vxlan100
+        virtual_router_id 51
+        priority 254
+        advert_int 1
+        authentication {
+              auth_type PASS
+              auth_pass ?7zJk!FVvr!m
+        }
+        virtual_ipaddress {
+              172.16.3.5/16
+        }
+}
+```
+
+Associé au 
+
+​      port "http" {
+
+​        static = 8081
+
+​        host_network = "public"
+
+​      }
+
+de happroxy, happroxy se mettra automatiquement sur le noeud avec le host "public" d'actif (soit l'ip flottante)
+
 ## TODO: 
 
-- Si jamais cette elmerforst tombe, pas de soucis, grâce à `keepalived` l'ip flottante sera assignée à baggersee, et nomad transferera l'instance haproxy sur baggersee.
 - Faire du scale up auto
 - Ranger mes scripts
