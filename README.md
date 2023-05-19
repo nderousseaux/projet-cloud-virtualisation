@@ -6,7 +6,7 @@ Backend / worker : [`./api/`](./api/README.md)
 
 Frontend : [`./web/`](./web/README.md)
 
-## Déployer en local
+## Test en local
 
 ### Définir les variables d'environnement
 
@@ -37,3 +37,24 @@ Et changer le fichier `web/public/config.json` :
 ```
 docker compose up --env-file .env
 ```
+
+## Déployement
+
+### Pull les nouvelles versions de docker
+
+Après s'être inscrit au répos avec le docker login
+
+```
+docker build -t quay.io/cloud-projet/worker -f api/Dockerfile.worker api
+docker build -t quay.io/cloud-projet/worker -f api/Dockerfile.api api
+docker build -t quay.io/cloud-projet/web -f web/Dockerfile web
+docker push quay.io/cloud-projet/worker
+docker push quay.io/cloud-projet/worker
+docker push quay.io/cloud-projet/web
+```
+
+### Déployer sur la vm
+
+- Sur l'orchéstrateur (krimmeri), copier le dossier deploy.
+
+- Lancer le script `sh deploy.sh`. Il utilisera le env-file qui se trouve dans le dossier home pour mettre substituer les variables d'environnement.

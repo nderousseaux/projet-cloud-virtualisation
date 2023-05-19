@@ -47,6 +47,7 @@ job "haproxy" {
         data = <<EOF
 defaults
    mode http
+   maxconn 10000
 
 frontend stats
   bind *:8081
@@ -54,13 +55,31 @@ frontend stats
    stats show-legends
    no log
 
-frontend http_front
-   bind *:8081
-   default_backend http_back
+backend front_back
+  balance roundrobin
+  server-template web 1-10 _web._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
 
-backend http_back
-    balance roundrobin
-    server-template cloud 1-10 _web._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
+backend api_back
+  http-response set-header Access-Control-Allow-Origin "*"
+  balance roundrobin  
+  server-template api 1-10 _api._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
+
+backend poubelle
+  mode http
+  http-request deny
+
+frontend http-in
+  bind *:8081
+  mode http
+  acl is_api hdr(Host) -i api.homme-de-fer.100do.se
+  acl is_api hdr(Host) -i api.homme-de-fer.100do.se:8081
+  acl is_web hdr(Host) -i homme-de-fer.100do.se
+  acl is_web hdr(Host) -i homme-de-fer.100do.se:8081
+  use_backend api_back if is_api
+  use_backend front_back if is_web
+
+  default_backend poubelle
+
 
 resolvers consul
     nameserver consul 172.16.1.18:53
@@ -73,7 +92,7 @@ EOF
 
       resources {
         cpu    = 200
-        memory = 128
+        memory = 256
       }
     }
   }

@@ -1,12 +1,13 @@
-job "cloud-app" {
+job "web" {
   datacenters = ["homme-de-fer"]
 
-  group "app" {
+  group "web" {
     count = 1
 
     network {
+      
       port "web" {
-        static = 3000
+        to = 3000
       }
     }
 
@@ -15,6 +16,11 @@ job "cloud-app" {
       config {
         image = "quay.io/cloud-projet/web"
         ports = ["web"]
+      }
+
+      env {
+        PORT    = "${NOMAD_PORT_web}"
+        NODE_IP = "${NOMAD_IP_web}"
       }
 
 			service {
@@ -32,9 +38,15 @@ job "cloud-app" {
 			}
 
       resources {
-        cpu    = 100
-        memory = 128
+        cpu    = 200
+        memory = 256
       }
+    }
+
+    scaling {
+      enabled = true
+      min = 1
+      max = 10
     }
 	}
 }

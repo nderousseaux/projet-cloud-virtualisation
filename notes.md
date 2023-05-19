@@ -1,4 +1,4 @@
-## Ip flotante 
+Ip flotante 
 
 172.16.3.5:8081 :https://homme-de-fer.100do.se/ 
 
@@ -65,6 +65,12 @@ consul join elmerforst.internal.100do.se
 
 ### 3 - Déployement
 
+Afin d'éviter de partager nos variables d'environnement, elles sont dans un fichier env-file dans deploy uniqement sur krimmeri (l'orchestrateur). Le script deploy met à jour ces variables d'environnement et met à jour les jobs nomad.
+
+Toute la demarche pour déployer est dans le readme.
+
+Si on avait eu plus de temps, le script deploy n'aurait pas subsitué les variables d'environnement (pas ultra secure) mais on aurrait utilisé `vault` lié à nomad pour stockér les variables sensible.
+
 ### a - Happroxy
 
 On décide de mettre le répartiteur de charge sur elmerforst. On peut voir son job nomad dans `nomad-jobs/haproxy.hcl`. 
@@ -98,13 +104,42 @@ Permet de rediriger les conections entrentes sur 8080 vers une instance de web. 
 
 On peut voir son job nomad dans `nomad-jobs/web.hcl`.  
 
+```
+env {
+  PORT    = "${NOMAD_PORT_web}"
+  NODE_IP = "${NOMAD_IP_web}"
+}
+```
+
+Ce morceau de configuration permet à nomad de choisir automatiquement le port et l'ip de l'application web. Il va être enregistré dans consul. Ainsi, on peut lancer plusieurs instances de web et happroxy s'occupera de rediriger les connections ou il faut à l'aide des informations stockés dans consul.
+
+```
+ scaling {
+      enabled = true
+      min = 1
+      max = 10
+    }
+```
+
+Celui là permet d'augmenter le nombre d'instances en cliquant sur un bouton dans l'interface nomad, ensuite haproxy et consul s'occupent du reste comme expliqué dans le paragraphe précédent. 
+
+Pour l'instant le scale up automatique n'est pas encore implémenté.
+
+### C-api
+
+`nomad-jobs/api.hcl`
+
+Same que web
+
+### D - Worker
+
+`nomad-jobs/worker.hcl`
+
+Same que web, mais sans le réseau (il a juste besoin de la fille de message rabitmq)
+
 ## TODO: 
 
-- Faire passer l'ip flottante en ip principale -> Permet de se dirriger sur homme-de-fer -> Fait mais ou pourquoi je ne peux pas me connecter depuis l'extérieur ?
-- Faire en sorte de pouvoir lancer plusieurs instances de web (grace à $PORT_NOMAD)
-- Faire du scale up auto
-- Ajouter les images api/worker et redis
-
 - Si jamais cette elmerforst tombe, pas de soucis, grâce à `keepalived` l'ip flottante sera assignée à baggersee, et nomad transferera l'instance haproxy sur baggersee.
-- PAS DE ENV DANS LE FICHIER DE CONFIG -> OU ?
 - Auto-deploy sur gitlab
+- Faire du scale up auto
+- Ranger mes scripts
