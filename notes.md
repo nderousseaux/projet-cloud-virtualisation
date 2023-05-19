@@ -42,7 +42,7 @@ J'ai tout conteneurisé. Il y a des Dockerfile dans `api` et dans `web`. Le `doc
 
 Du coup il est super simple de déployer en local sur ta machine (tout est dans le `readme.md`).
 
-On peut push sur notre repo en buildant (avec la commande qu'il y tout en haut des 3 dockers compose), puis en faisant : `docker push quay.io/cloud-projet/<container>`.
+On peut push sur notre repo en buildant (avec la commande qu'il y tout en haut des 3 dockers compose), puis en faisant : `docker push registry.app.unistra.fr/nderousseaux/projet-cloud-virt/<container>`.
 
 Notre repo docker : https://quay.io/organization/cloud-projet?tab=repos
 
@@ -71,7 +71,7 @@ Toute la demarche pour déployer est dans le readme.
 
 Si on avait eu plus de temps, le script deploy n'aurait pas subsitué les variables d'environnement (pas ultra secure) mais on aurrait utilisé `vault` lié à nomad pour stockér les variables sensible.
 
-### a - Happroxy
+#### a - Happroxy
 
 On décide de mettre le répartiteur de charge sur elmerforst. On peut voir son job nomad dans `nomad-jobs/haproxy.hcl`. 
 
@@ -100,7 +100,7 @@ backend http_back
 
 Permet de rediriger les conections entrentes sur 8080 vers une instance de web. L'addresse de cette instance (qui peut être sur l'un ou l'autre des serveur) sera donnée par consul.
 
-### b - Web
+#### b - Web
 
 On peut voir son job nomad dans `nomad-jobs/web.hcl`.  
 
@@ -125,21 +125,31 @@ Celui là permet d'augmenter le nombre d'instances en cliquant sur un bouton dan
 
 Pour l'instant le scale up automatique n'est pas encore implémenté.
 
-### C-api
+#### C-api
 
 `nomad-jobs/api.hcl`
 
 Same que web
 
-### D - Worker
+#### D - Worker
 
 `nomad-jobs/worker.hcl`
 
 Same que web, mais sans le réseau (il a juste besoin de la fille de message rabitmq)
 
+### 4 - Auto déployement
+
+Pour déployer, il faut faire 2 choses.
+
+1. Mettre les nouvelles images docker sur le repo docker
+2. Mettre les jobs sur krimmeri
+
+Le script deploy.sh fait tout ça.
+
+On aurrait pu faire ça sur gitlab-ci/cd, mais pas confiance en gitlab 
+
 ## TODO: 
 
 - Si jamais cette elmerforst tombe, pas de soucis, grâce à `keepalived` l'ip flottante sera assignée à baggersee, et nomad transferera l'instance haproxy sur baggersee.
-- Auto-deploy sur gitlab
 - Faire du scale up auto
 - Ranger mes scripts

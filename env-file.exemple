@@ -3,3 +3,4 @@ aws_secret_access_key=
 s3_bucket_name=
 s3_endpoint_url=
 celery_broker_url=
+version=

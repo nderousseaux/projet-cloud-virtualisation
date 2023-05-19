@@ -14,7 +14,8 @@ job "web" {
     task "web" {
       driver = "docker"
       config {
-        image = "quay.io/cloud-projet/web"
+        force_pull = true
+        image = "quay.io/cloud-projet/web:$version"
         ports = ["web"]
       }
 

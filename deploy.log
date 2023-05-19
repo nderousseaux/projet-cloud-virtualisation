@@ -1,0 +1,354 @@
+#1 [internal] load build definition from Dockerfile.api
+#1 sha256:730c5ef9f55ce454ebe8146dda089a98979a374366bcc692d6d94e32e39c7c00
+#1 transferring dockerfile: 585B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 sha256:a4aa329f2fe0a90c6788c7c2b8ede15a76c23356415d9f2f4a80b88d61c06b74
+#2 transferring context: 2B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.11.3-slim-buster
+#3 sha256:d4c2db29ccae0f355e6b3303e10c24670639f73a73eec89c3f9db732a876eadf
+#3 DONE 0.0s
+
+#4 [1/5] FROM docker.io/library/python:3.11.3-slim-buster
+#4 sha256:da2af6bd46ede452c5a3eeeb93ba7b2bfef588b7c141b61cffd5503bc318b190
+#4 DONE 0.0s
+
+#6 [internal] load build context
+#6 sha256:5d9bb21a45bd669c07ba26ec9cf8129eb6a15e94cd00f58a1f7ea12807a1a420
+#6 transferring context: 1.23kB done
+#6 DONE 0.0s
+
+#5 [2/5] WORKDIR /app
+#5 sha256:c3ac9270d8a9493923c36f8038cb91b145c21efa0f48396cda3cae5787b5e954
+#5 CACHED
+
+#7 [3/5] COPY . /app
+#7 sha256:f631b30ae427faa4b225c1fbfbd9b0139df305c0a60d7f93c54a42b38e4f9860
+#7 CACHED
+
+#8 [4/5] RUN pip install .
+#8 sha256:85720528639bd9504e22f13f21463cf56a59da0912c7132f83e5275038b714d9
+#8 CACHED
+
+#9 [5/5] RUN pip install gunicorn
+#9 sha256:970b3df2885af3e52035bcc8f696b436907ba26874583256147231dcc1667525
+#9 CACHED
+
+#10 exporting to image
+#10 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#10 exporting layers done
+#10 writing image sha256:557fe85a477ac13f230df0b636ab54e68306408a6636eb0bbabf23e978c2cfcc done
+#10 naming to quay.io/cloud-projet/api:1.0.2 done
+#10 DONE 0.0s
+#1 [internal] load build definition from Dockerfile.worker
+#1 sha256:2137b641265a8995ae2aaca79fb29a33afa7fbb3eb85acb0bcfa75eb9cb3286d
+#1 transferring dockerfile: 495B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 sha256:b1a26cc04efdda45d0f26fd1e6949b2cee2f7ebbd0b1ae3fdd771176a9bae8f6
+#2 transferring context: 2B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.11.3-slim-buster
+#3 sha256:d4c2db29ccae0f355e6b3303e10c24670639f73a73eec89c3f9db732a876eadf
+#3 DONE 0.0s
+
+#4 [1/4] FROM docker.io/library/python:3.11.3-slim-buster
+#4 sha256:da2af6bd46ede452c5a3eeeb93ba7b2bfef588b7c141b61cffd5503bc318b190
+#4 DONE 0.0s
+
+#6 [internal] load build context
+#6 sha256:1dcf33e3eb0906d077dd71c04dcf03d85177f428adbb40d7f4802c126244b6a7
+#6 transferring context: 1.23kB done
+#6 DONE 0.0s
+
+#5 [2/4] WORKDIR /app
+#5 sha256:c3ac9270d8a9493923c36f8038cb91b145c21efa0f48396cda3cae5787b5e954
+#5 CACHED
+
+#7 [3/4] COPY . /app
+#7 sha256:6071254d5cd28471774adcacf327832d345b9c45bf7f623bc1ef009d73d8f9e1
+#7 CACHED
+
+#8 [4/4] RUN pip install .
+#8 sha256:4ca98fd7c2235716c1e61d206d3395729aeff48fc5c846c6825cf601d4edf658
+#8 CACHED
+
+#9 exporting to image
+#9 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#9 exporting layers done
+#9 writing image sha256:648cab54ddfe1dbe5b950bc47119eb7466db5ced831bc3d043c3420eda09ca4c done
+#9 naming to quay.io/cloud-projet/worker:1.0.2 done
+#9 DONE 0.0s
+#1 [internal] load build definition from Dockerfile
+#1 sha256:33b90ba115fd0e746faa4a380cb090fa6799e0ab78cd0cd9b5966ba6f3b65bd5
+#1 transferring dockerfile: 74B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 sha256:e7fefe92ece3e768d792c2fce12f0fbe9ec8f7807b390e3f61d8a3ec10dd0b04
+#2 transferring context: 2B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18
+#3 sha256:2075f92ee200d60c58a0280e24693548f3220d21fb6c89da59dcfc23eb696f9e
+#3 DONE 1.7s
+
+#4 [1/6] FROM docker.io/library/node:18@sha256:3f567a26b6b6d601fb2b168d4f987b50697617ead15bfc0e0152e600ac48d0fe
+#4 sha256:282edf2adf68f47c78bc04099b20ee58485d2bf031f7468699ae4fbfbf0f57b9
+#4 DONE 0.0s
+
+#6 [internal] load build context
+#6 sha256:9716e069ba0971031500720e6c7be7d12c62124fa54276c47a60b6e05d68a6ee
+#6 transferring context: 1.30MB 1.3s done
+#6 DONE 1.3s
+
+#7 [3/6] COPY package*.json ./
+#7 sha256:2209fe31751eeae27beb8dba35fa0cec17a312d483db83909b02df5ea84e691a
+#7 CACHED
+
+#8 [4/6] RUN npm ci
+#8 sha256:0848e361845b5daaf1c128bb6dbd9ebc1bca26a51345181d711f5035cfeca58f
+#8 CACHED
+
+#9 [5/6] COPY . .
+#9 sha256:90e8c88e6a91346024c216c082d732005be5ed34988866224b08a5f791441857
+#9 CACHED
+
+#5 [2/6] WORKDIR /usr/src/app
+#5 sha256:11af4f7d218ed6ccbc229503c90925ad2c2bb3ac604f3a9867e4e4a92bd333e2
+#5 CACHED
+
+#10 [6/6] RUN npm run build
+#10 sha256:4a471290c8014621a4e79f0097c9e137e25b5801ba7af0aca320168032ed85b5
+#10 CACHED
+
+#11 exporting to image
+#11 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#11 exporting layers done
+#11 writing image sha256:6e67a35b7301f703ca4840c7465f711828c5d2a70ab6efcb1dc1b1030fdc1abd
+#11 writing image sha256:6e67a35b7301f703ca4840c7465f711828c5d2a70ab6efcb1dc1b1030fdc1abd done
+#11 naming to quay.io/cloud-projet/web:1.0.2 done
+#11 DONE 0.0s
+The push refers to repository [quay.io/cloud-projet/api]
+a1a88f38deb0: Preparing
+597148b3b497: Preparing
+eadb1c1b1b02: Preparing
+d64f0daeb55e: Preparing
+05f963a44336: Preparing
+158425479095: Preparing
+fc175adf4b91: Preparing
+a407eb592362: Preparing
+e7ce315f4d84: Preparing
+a407eb592362: Waiting
+158425479095: Waiting
+fc175adf4b91: Waiting
+e7ce315f4d84: Waiting
+eadb1c1b1b02: Layer already exists
+a1a88f38deb0: Layer already exists
+597148b3b497: Layer already exists
+d64f0daeb55e: Layer already exists
+05f963a44336: Layer already exists
+fc175adf4b91: Layer already exists
+158425479095: Layer already exists
+e7ce315f4d84: Layer already exists
+a407eb592362: Layer already exists
+1.0.2: digest: sha256:31f72b6dd45fc230cee82b69bef3063a74aa297f6b772867efe9fa775ebf6f99 size: 2207
+The push refers to repository [quay.io/cloud-projet/worker]
+597148b3b497: Preparing
+eadb1c1b1b02: Preparing
+d64f0daeb55e: Preparing
+05f963a44336: Preparing
+158425479095: Preparing
+fc175adf4b91: Preparing
+a407eb592362: Preparing
+e7ce315f4d84: Preparing
+e7ce315f4d84: Waiting
+fc175adf4b91: Waiting
+a407eb592362: Waiting
+eadb1c1b1b02: Layer already exists
+d64f0daeb55e: Layer already exists
+158425479095: Layer already exists
+597148b3b497: Layer already exists
+05f963a44336: Layer already exists
+e7ce315f4d84: Layer already exists
+fc175adf4b91: Layer already exists
+a407eb592362: Layer already exists
+1.0.2: digest: sha256:23990b6df0dbfa7bc3d575ee52fd6034b67176e509662b3048fb65e6cb4cb721 size: 1997
+The push refers to repository [quay.io/cloud-projet/web]
+994ce5bda624: Preparing
+25cf751e8d07: Preparing
+45386faa1af8: Preparing
+536b8b8d4e24: Preparing
+7b3c7f1586b0: Preparing
+b7dba64f2bcc: Preparing
+4c8ed5ea5bf4: Preparing
+9fb20bb19394: Preparing
+2b0668a55661: Preparing
+f43725f97b9f: Preparing
+9c42af2c6418: Preparing
+d96e248f10e6: Preparing
+d925e0fae4e6: Preparing
+4c8ed5ea5bf4: Waiting
+9fb20bb19394: Waiting
+2b0668a55661: Waiting
+b7dba64f2bcc: Waiting
+f43725f97b9f: Waiting
+d925e0fae4e6: Waiting
+9c42af2c6418: Waiting
+d96e248f10e6: Waiting
+7b3c7f1586b0: Layer already exists
+45386faa1af8: Layer already exists
+25cf751e8d07: Layer already exists
+536b8b8d4e24: Layer already exists
+994ce5bda624: Layer already exists
+b7dba64f2bcc: Layer already exists
+9fb20bb19394: Layer already exists
+2b0668a55661: Layer already exists
+f43725f97b9f: Layer already exists
+4c8ed5ea5bf4: Layer already exists
+9c42af2c6418: Layer already exists
+d925e0fae4e6: Layer already exists
+d96e248f10e6: Layer already exists
+1.0.2: digest: sha256:a82d20a53bf358ec202f35ad67bc3bcb1fbdc47ab41dda15700396343099eeb8 size: 3056
+==> 2023-05-19T18:31:42Z: Monitoring evaluation "12ed4657"
+    2023-05-19T18:31:42Z: Evaluation triggered by job "worker"
+    2023-05-19T18:31:42Z: Evaluation within deployment: "cda47a07"
+    2023-05-19T18:31:42Z: Allocation "f2946086" created: node "ae367b9f", group "worker"
+    2023-05-19T18:31:42Z: Evaluation status changed: "pending" -> "complete"
+==> 2023-05-19T18:31:42Z: Evaluation "12ed4657" finished with status "complete"
+==> 2023-05-19T18:31:42Z: Monitoring deployment "cda47a07"
+    
+2023-05-19T18:31:42Z
+ID          = cda47a07
+Job ID      = worker
+Job Version = 9
+Status      = running
+Description = Deployment is running
+
+Deployed
+Task Group  Desired  Placed  Healthy  Unhealthy  Progress Deadline
+worker      1        1       0        0          2023-05-19T18:41:42Z
+    
+2023-05-19T18:31:58Z
+ID          = cda47a07
+Job ID      = worker
+Job Version = 9
+Status      = running
+Description = Deployment is running
+
+Deployed
+Task Group  Desired  Placed  Healthy  Unhealthy  Progress Deadline
+worker      1        1       1        0          2023-05-19T18:41:58Z
+    
+2023-05-19T18:31:59Z
+ID          = cda47a07
+Job ID      = worker
+Job Version = 9
+Status      = successful
+Description = Deployment completed successfully
+
+Deployed
+Task Group  Desired  Placed  Healthy  Unhealthy  Progress Deadline
+worker      1        1       1        0          2023-05-19T18:41:58Z
+==> 2023-05-19T18:32:01Z: Monitoring evaluation "e06cf29c"
+    2023-05-19T18:32:01Z: Evaluation triggered by job "api"
+    2023-05-19T18:32:02Z: Evaluation within deployment: "c0d49690"
+    2023-05-19T18:32:02Z: Allocation "1b4b6e30" created: node "ae367b9f", group "api"
+    2023-05-19T18:32:02Z: Evaluation status changed: "pending" -> "complete"
+==> 2023-05-19T18:32:02Z: Evaluation "e06cf29c" finished with status "complete"
+==> 2023-05-19T18:32:02Z: Monitoring deployment "c0d49690"
+    
+2023-05-19T18:32:02Z
+ID          = c0d49690
+Job ID      = api
+Job Version = 9
+Status      = running
+Description = Deployment is running
+
+Deployed
+Task Group  Desired  Placed  Healthy  Unhealthy  Progress Deadline
+api         1        1       0        0          2023-05-19T18:42:01Z
+    
+2023-05-19T18:32:21Z
+ID          = c0d49690
+Job ID      = api
+Job Version = 9
+Status      = running
+Description = Deployment is running
+
+Deployed
+Task Group  Desired  Placed  Healthy  Unhealthy  Progress Deadline
+api         1        1       1        0          2023-05-19T18:42:21Z
+    
+2023-05-19T18:32:22Z
+ID          = c0d49690
+Job ID      = api
+Job Version = 9
+Status      = successful
+Description = Deployment completed successfully
+
+Deployed
+Task Group  Desired  Placed  Healthy  Unhealthy  Progress Deadline
+api         1        1       1        0          2023-05-19T18:42:21Z
+==> 2023-05-19T18:32:24Z: Monitoring evaluation "8e9a7ab1"
+    2023-05-19T18:32:24Z: Evaluation triggered by job "web"
+    2023-05-19T18:32:25Z: Evaluation within deployment: "7bd2a386"
+    2023-05-19T18:32:25Z: Allocation "ef26ed48" created: node "ae367b9f", group "web"
+    2023-05-19T18:32:25Z: Evaluation status changed: "pending" -> "complete"
+==> 2023-05-19T18:32:25Z: Evaluation "8e9a7ab1" finished with status "complete"
+==> 2023-05-19T18:32:25Z: Monitoring deployment "7bd2a386"
+    
+2023-05-19T18:32:25Z
+ID          = 7bd2a386
+Job ID      = web
+Job Version = 5
+Status      = running
+Description = Deployment is running
+
+Deployed
+Task Group  Desired  Placed  Healthy  Unhealthy  Progress Deadline
+web         1        1       0        0          2023-05-19T18:42:24Z
+    
+2023-05-19T18:32:52Z
+ID          = 7bd2a386
+Job ID      = web
+Job Version = 5
+Status      = running
+Description = Deployment is running
+
+Deployed
+Task Group  Desired  Placed  Healthy  Unhealthy  Progress Deadline
+web         1        1       1        0          2023-05-19T18:42:51Z
+    
+2023-05-19T18:32:53Z
+ID          = 7bd2a386
+Job ID      = web
+Job Version = 5
+Status      = successful
+Description = Deployment completed successfully
+
+Deployed
+Task Group  Desired  Placed  Healthy  Unhealthy  Progress Deadline
+web         1        1       1        0          2023-05-19T18:42:51Z
+==> 2023-05-19T18:32:55Z: Monitoring evaluation "e37029f0"
+    2023-05-19T18:32:55Z: Evaluation triggered by job "haproxy"
+    2023-05-19T18:32:56Z: Evaluation within deployment: "026827eb"
+    2023-05-19T18:32:56Z: Evaluation status changed: "pending" -> "complete"
+==> 2023-05-19T18:32:56Z: Evaluation "e37029f0" finished with status "complete"
+==> 2023-05-19T18:32:56Z: Monitoring deployment "026827eb"
+    
+2023-05-19T18:32:56Z
+ID          = 026827eb
+Job ID      = haproxy
+Job Version = 2
+Status      = successful
+Description = Deployment completed successfully
+
+Deployed
+Task Group  Desired  Placed  Healthy  Unhealthy  Progress Deadline
+haproxy     1        1       1        0          2023-05-19T18:33:26Z

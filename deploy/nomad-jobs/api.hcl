@@ -13,7 +13,8 @@ job "api" {
     task "api" {
       driver = "docker"
       config {
-        image = "quay.io/cloud-projet/api"
+        force_pull = true
+        image = "quay.io/cloud-projet/api:$version"
         ports = ["api"]
       }
 

@@ -56,6 +56,7 @@ frontend stats
    no log
 
 backend front_back
+  http-response set-header Access-Control-Allow-Origin "*"
   balance roundrobin
   server-template web 1-10 _web._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
 

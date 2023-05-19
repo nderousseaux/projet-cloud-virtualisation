@@ -9,7 +9,7 @@ job "worker" {
     task "worker" {
       driver = "docker"
       config {
-        image = "quay.io/cloud-projet/worker"
+        image = "quay.io/cloud-projet/worker:$version"
       }
 
       env {

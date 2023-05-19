@@ -40,21 +40,6 @@ docker compose up --env-file .env
 
 ## Déployement
 
-### Pull les nouvelles versions de docker
+Si la machine krimmeri est accessible via l'alias `krimmeri` et que le repo docker Quay.io/cloud-projet est enregistré, il suffit de lancer le script deploy.sh
 
-Après s'être inscrit au répos avec le docker login
-
-```
-docker build -t quay.io/cloud-projet/worker -f api/Dockerfile.worker api
-docker build -t quay.io/cloud-projet/worker -f api/Dockerfile.api api
-docker build -t quay.io/cloud-projet/web -f web/Dockerfile web
-docker push quay.io/cloud-projet/worker
-docker push quay.io/cloud-projet/worker
-docker push quay.io/cloud-projet/web
-```
-
-### Déployer sur la vm
-
-- Sur l'orchéstrateur (krimmeri), copier le dossier deploy.
-
-- Lancer le script `sh deploy.sh`. Il utilisera le env-file qui se trouve dans le dossier home pour mettre substituer les variables d'environnement.
+Le fichier `env-file` donnera les variables d'environnement, un nouveau numéro de version déclanchera un déployement de la nouvelle version. (Attention, si on ne change pas le numéro de version pas de nouvelle version, donc nomad ne redéployara pas)
