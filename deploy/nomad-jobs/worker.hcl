@@ -4,7 +4,7 @@ job "worker" {
 
 
   group "worker" {
-    count = 1
+    count = 2
 
     task "worker" {
       driver = "docker"
@@ -32,7 +32,7 @@ job "worker" {
 
     scaling {
       enabled = true
-      min = 1
+      min = 2
       max = 10
     }
 	}

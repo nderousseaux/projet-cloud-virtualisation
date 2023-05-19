@@ -2,13 +2,6 @@ job "haproxy" {
   datacenters = ["homme-de-fer"]
   type        = "service"
 
-  // # On prefère utiliser un noeud plutot qu'un autre
-  // affinity {
-  //   attribute = "${node.unique.id}"
-  //   value     = "ae367b9f-487e-2a9f-340e-9396284ee72b"
-  // }
-
-
   group "haproxy" {
     count = 1
 

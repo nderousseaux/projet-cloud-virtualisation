@@ -200,7 +200,8 @@ Associé au
 
 de happroxy, happroxy se mettra automatiquement sur le noeud avec le host "public" d'actif (soit l'ip flottante)
 
-## TODO: 
+### 6 - Auto scale up
 
-- Faire du scale up auto
+Il faudrait ajouter une extension du type nomad autoscaler. -> A la place on peut clicker sur les boutons sur nomad.
+
 - Ranger mes scripts

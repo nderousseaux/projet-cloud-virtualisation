@@ -2,12 +2,13 @@ job "web" {
   datacenters = ["homme-de-fer"]
 
   group "web" {
-    count = 1
+    count = 2
 
     network {
       
       port "web" {
         to = 3000
+        host_network = "internal"
       }
     }
 
@@ -46,7 +47,7 @@ job "web" {
 
     scaling {
       enabled = true
-      min = 1
+      min = 2
       max = 10
     }
 	}

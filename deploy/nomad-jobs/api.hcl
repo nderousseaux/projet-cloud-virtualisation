@@ -2,11 +2,12 @@ job "api" {
   datacenters = ["homme-de-fer"]
 
   group "api" {
-    count = 1
+    count = 2
 
     network {
       port "api" {
 				to = 8080
+        host_network = "internal"
 			}
     }
 
@@ -48,7 +49,7 @@ job "api" {
 
     scaling {
       enabled = true
-      min = 1
+      min = 2
       max = 10
     }
 	}
