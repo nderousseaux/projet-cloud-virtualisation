@@ -5,7 +5,6 @@ job "web" {
     count = 2
 
     network {
-      
       port "web" {
         to = 3000
         host_network = "internal"

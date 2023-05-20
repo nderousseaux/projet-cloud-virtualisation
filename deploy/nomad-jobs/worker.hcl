@@ -1,8 +1,6 @@
 job "worker" {
   datacenters = ["homme-de-fer"]
 
-
-
   group "worker" {
     count = 2
 
